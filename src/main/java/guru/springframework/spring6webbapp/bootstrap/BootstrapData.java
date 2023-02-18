@@ -2,6 +2,8 @@ package guru.springframework.spring6webbapp.bootstrap;
 
 import guru.springframework.spring6webbapp.domain.Author;
 import guru.springframework.spring6webbapp.domain.Book;
+import guru.springframework.spring6webbapp.domain.Publisher;
+import guru.springframework.spring6webbapp.repostories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import guru.springframework.spring6webbapp.repostories.AuthorRepository;
@@ -13,10 +15,13 @@ public class BootstrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+
+    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository,PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -51,6 +56,13 @@ public class BootstrapData implements CommandLineRunner {
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
 
+        Publisher publisher = new Publisher("Publisher One","Address One","City One", "State One", "Zip One");
+        Publisher publisherSaved = publisherRepository.save(publisher);
+        publisherSaved.getAuthors().add(eric);
+        publisherRepository.save(publisherSaved);
+        publisher.getBooks().add(dddSaved);
+        publisherRepository.save(publisher);
+
         System.out.println("In bootstrap :" );
         System.out.println("authors :" + authorRepository.count());
         System.out.println("books :" + bookRepository.count());
@@ -60,6 +72,16 @@ public class BootstrapData implements CommandLineRunner {
 
         System.out.println("Author :" + rod.getName() + " " + rod.getLastName());
         System.out.println("books :" + rod.getBooks().size());
+
+        System.out.println("Publisher repository has :");
+        System.out.println("publishers :" + publisherRepository.count());
+        System.out.println("With :");
+        System.out.println("authors :" + publisher.getAuthors().size());
+
+        System.out.println("Publisher repository has :");
+        System.out.println("books :" + publisherRepository.count());
+        System.out.println("With :");
+        System.out.println("books :" + publisher.getBooks().size());
 
     }
 }
