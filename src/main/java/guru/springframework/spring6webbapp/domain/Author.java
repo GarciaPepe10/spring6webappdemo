@@ -16,6 +16,8 @@ public class Author {
     private Long id;
     private String name;
     private String lastName;
+    @ManyToOne
+    private Publisher publisher;
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<Book>();
 
@@ -49,6 +51,15 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    //@JoinColumn(name="publisher_id")
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
