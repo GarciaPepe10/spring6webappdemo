@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:tdtrth="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors List</title>
+</head>
+<body>
+<h1>authors list</h1>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>LastName</td>
+    </tr>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.id}">4</td>
+        <td th:text="${author.name}">4</td>
+        <td th:text="${author.lastName}">4</td>
+    </tr>
+</table>
+</body>
+</html>

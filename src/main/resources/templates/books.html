@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:tdtrth="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Books list</title>
+</head>
+<body>
+<h1>books list</h1>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>title</td>
+        <td>isbn</td>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">4</td>
+        <td th:text="${book.title}">4</td>
+        <td th:text="${book.isbn}">4</td>
+    </tr>
+</table>
+</body>
+</html>
